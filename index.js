@@ -23,21 +23,69 @@
 // });
 
 
-var dealerSum = 0;
-var yourSum = 0;
+   //both of these variables are used to: compare the values of the dealer's hand 
+    //and the player's hand, to determine a winner and to display a message. 
+
+    var dealerSum = 0;  //this variable will be used to track the score of the dealer's hand 
+    var yourSum = 0;    //this variable will be used to track the scor of the player's hand. 
 
 var dealerAceCount = 0;
 var yourAceCount = 0; 
 
-var hidden;
-var deck;
+var hidden; // this is the variable that will store and display the hidden card. 
+var deck;   // this is the variable that 
 
 var canHit = true; //allows the player (you) to draw while yourSum <= 21
 
-window.onload = function() {
+
+// document.getElementById("deal-button").addEventListener("click", event => restartGame());
+
+
+
+
+
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
+function restartGame() {
+    const dealerHand = document.getElementById("dealer-hand");
+    const playerHand = document.getElementById("player-hand");
+    const winLoseMessage = document.getElementById("messages");
+    document.getElementById("dealer-points").innerText = "";
+    document.getElementById("player-points").innerText = "";
+    document.getElementById("messages").innerText = "";
+    
+    removeAllChildNodes(dealerHand);
+    removeAllChildNodes(playerHand);
+    removeAllChildNodes(winLoseMessage);
+
+    let cardImg = document.createElement("img");
+    cardImg.src = "./images/BACK.png";
+    cardImg.id = "hidden"
+    dealerHand.append(cardImg)
+
+
+    
+    dealerSum = 0;
+    yourSum = 0;
+
+    dealerAceCount = 0;
+    yourAceCount = 0; 
+
+    hidden = undefined;
+    deck = undefined;
+
+    // canHit = false;
+    
     buildDeck();
     shuffleDeck();
     startGame();
+
+    console.log(playerHand);
+    console.log(dealerHand + "this is what im lookig for")
 }
 
 function buildDeck() {
@@ -90,10 +138,18 @@ function startGame() {
     }
 
     console.log(yourSum);
+}
+
+window.onload = function() {
+    buildDeck();
+    shuffleDeck();
+    startGame();
     document.getElementById("hit-button").addEventListener("click", hit);
     document.getElementById("stand-button").addEventListener("click", stay);
-
+    document.getElementById("deal-button").addEventListener("click", event => restartGame());
 }
+
+
 
 function hit() {
     if (!canHit) {
