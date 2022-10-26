@@ -1,9 +1,57 @@
+// const dealerHand = document.getElementById("dealer-hand");
+//push cards to the img tag in dealerHand
+
+// const playerHand = document.getElementById("player-hand");
+//push cards to the img tag in playerhand
+
+// const deck = [];
+// we're creating a deck and add to it later 
 
 
-//both of these variables are used to: compare the values of the dealer's hand 
-//and the player's hand, to determine a winner and to display a message. 
-var dealerSum = 0;  //this variable will be used to track the score of the dealer's hand 
-var yourSum = 0;    //this variable will be used to track the scor of the player's hand. 
+// const suits = ["H", "S", "C", "D"];
+//used to assign suits of the cards
+
+// const ranks = ["ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
+// used to assign the rank of the cards -> dealer-points & player-points
+
+//inline function 
+//this is a function to create a deck for each player
+//dont need to touch
+
+// const makeDeck = (rank, suit) => {
+//   const card = {
+//     rank: rank,
+//     suit: suit,
+//     pointValue: rank > 10 ? 10 : rank,
+//   };
+//   deck.push(card);
+// };
+
+//dont need to touch
+// this is a multi-dim loop statement 
+// for (let suit of suits) {
+//   for (const rank of ranks) {
+//     makeDeck(rank, suit);
+//   }
+// }
+
+// ??????? lol
+// window.addEventListener("DOMContentLoaded", () => {
+//   // Execute after page load
+// });
+
+//new code to write:
+
+//somehow i need to shuffle the deck 
+
+
+
+
+    //both of these variables are used to: compare the values of the dealer's hand 
+    //and the player's hand, to determine a winner and to display a message. 
+
+    var dealerSum = 0;  //this variable will be used to track the score of the dealer's hand 
+    var yourSum = 0;    //this variable will be used to track the scor of the player's hand. 
 
 var dealerAceCount = 0;
 var yourAceCount = 0; 
@@ -12,7 +60,7 @@ var hidden; // this is the variable that will store and display the hidden card.
 var deck;   // this is the variable that 
 
 var canHit = true; //allows the player (you) to draw while yourSum <= 21
-// var canDeal = false; //allows the player to deal only once after a game has ended.
+
 
 // document.getElementById("deal-button").addEventListener("click", event => restartGame());
 
@@ -43,6 +91,8 @@ function restartGame() {
     cardImg.id = "hidden"
     dealerHand.append(cardImg)
 
+
+    
     dealerSum = 0;
     yourSum = 0;
 
@@ -52,8 +102,7 @@ function restartGame() {
     hidden = undefined;
     deck = undefined;
 
-    canHit = true;
-    // canDeal = false; // somehow i need to add this functionality. the player can deal ay any time and that is an unfair advantage. 
+    // canHit = false;
     
     buildDeck();
     shuffleDeck();
@@ -62,9 +111,6 @@ function restartGame() {
     console.log(playerHand);
     console.log(dealerHand + "this is what im lookig for")
 }
-
-
-
 
 function buildDeck() {
     let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
@@ -79,9 +125,6 @@ function buildDeck() {
     // console.log(deck);
 }
 
-
-
-
 function shuffleDeck() {
     for (let i = 0; i < deck.length; i++) {
         let j = Math.floor(Math.random() * deck.length); // (0-1) * 52 => (0-51.9999)
@@ -91,9 +134,6 @@ function shuffleDeck() {
     }
     console.log(deck);
 }
-
-
-
 
 function startGame() {
     hidden = deck.pop();
@@ -124,17 +164,13 @@ function startGame() {
     console.log(yourSum);
 }
 
-
-
-
 window.onload = function() {
     buildDeck();
     shuffleDeck();
     startGame();
     document.getElementById("hit-button").addEventListener("click", hit);
     document.getElementById("stand-button").addEventListener("click", stay);
-    // var canDeal = true; //im trying to make it so that the deal-button is only active one time after a 
-    document.getElementById("deal-button").addEventListener("click", event => restartGame()) 
+    document.getElementById("deal-button").addEventListener("click", event => restartGame());
 }
 
 
